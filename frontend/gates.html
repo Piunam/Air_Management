@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate Allocation Layout // AERO-OPS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-top">
+            <div class="system-time" id="digital-clock">00:00:00 UTC</div>
+            <div class="logo-area">
+                <h1>Aero<span>Ops</span></h1>
+            </div>
+            <div class="status-pill"><span class="pulse-dot"></span> Core Operations Logs</div>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-item">Overview Monitor</a>
+            <a href="flights.html" class="nav-item">Flight Stream Log</a>
+            <a href="gates.html" class="nav-item active">Gate Infrastructure</a>
+            <a href="resources.html" class="nav-item">Resource Allocations</a>
+            <a href="telemetry.html" class="nav-item">Airside Telemetry</a>
+            <a href="analytics.html" class="nav-item">Passenger Flows</a>
+        </nav>
+    </header>
+
+    <main class="app-viewport">
+        <header class="page-header">
+            <h2>Terminal Infrastructure Index</h2>
+            <p>Physical occupancy data streams across gates.</p>
+        </header>
+
+        <div class="gate-matrix">
+            <div class="gate-card occupied">
+                <div class="gate-name">Gate A01</div>
+                <div class="gate-meta">Occupied // LH-432</div>
+                <div class="gate-progress"><div class="gate-progress-fill" id="fill-g1" style="width: 45%"></div></div>
+            </div>
+            <div class="gate-card occupied">
+                <div class="gate-name">Gate A02</div>
+                <div class="gate-meta">Occupied // SQ-021</div>
+                <div class="gate-progress"><div class="gate-progress-fill" id="fill-g2" style="width: 70%"></div></div>
+            </div>
+            <div class="gate-card available">
+                <div class="gate-name">Gate A03</div>
+                <div class="gate-meta">Available Log // Approach Clear</div>
+                <div class="gate-progress"><div class="gate-progress-fill" style="width: 0%"></div></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="shared-engine.js"></script>
+    <script>
+        setInterval(() => {
+            const bar1 = document.getElementById('fill-g1');
+            const bar2 = document.getElementById('fill-g2');
+            if(bar1) {
+                let w1 = parseInt(bar1.style.width);
+                bar1.style.width = (w1 >= 100 ? 10 : w1 + 3) + '%';
+            }
+            if(bar2) {
+                let w2 = parseInt(bar2.style.width);
+                bar2.style.width = (w2 >= 100 ? 5 : w2 + 2) + '%';
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Optimization // AERO-OPS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="header-top">
+            <div class="system-time" id="digital-clock">00:00:00 UTC</div>
+            <div class="logo-area">
+                <h1>Aero<span>Ops</span></h1>
+            </div>
+            <div class="status-pill"><span class="pulse-dot"></span> Core Operations Logs</div>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-item">Overview Monitor</a>
+            <a href="flights.html" class="nav-item">Flight Stream Log</a>
+            <a href="gates.html" class="nav-item">Gate Infrastructure</a>
+            <a href="resources.html" class="nav-item active">Resource Allocations</a>
+            <a href="telemetry.html" class="nav-item">Airside Telemetry</a>
+            <a href="analytics.html" class="nav-item">Passenger Flows</a>
+        </nav>
+    </header>
+
+    <main class="app-viewport">
+        <header class="page-header">
+            <h2>Resource Management System (RMS)</h2>
+            <p>Dynamic terminal counter allocation and baggage carousel loops ledger.</p>
+        </header>
+
+        <div class="editorial-row">
+            <div class="editorial-col-main">
+                <h3 class="broadsheet-subheading">Check-In Desk Matrix</h3>
+                <div class="table-container">
+                    <table class="premium-table">
+                        <thead>
+                            <tr>
+                                <th>Desk Blocks</th>
+                                <th>Assigned Carrier</th>
+                                <th>Passenger Load</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="desk-rows"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="editorial-col-side">
+                <h3 class="broadsheet-subheading">Baggage Carousels</h3>
+                <div id="carousel-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="shared-engine.js"></script>
+    <script>
+        function hydrateResources() {
+            const deskBody = document.getElementById('desk-rows');
+            const carouselBox = document.getElementById('carousel-container');
+            
+            if(deskBody) {
+                deskBody.innerHTML = window.AeroState.resources.desks.map(d => `
+                    <tr>
+                        <td style="font-weight:700;">${d.id}</td>
+                        <td>${d.airline}</td>
+                        <td>${d.load}</td>
+                        <td><span class="badge" style="color:var(--status-green); border-color:var(--status-green);">${d.status}</span></td>
+                    </tr>
+                `).join('');
+            }
+
+            if(carouselBox) {
+                carouselBox.innerHTML = window.AeroState.resources.carousels.map(c => `
+                    <div class="telemetry-strip" style="flex-direction: column; align-items: flex-start; gap:0.25rem;">
+                        <span class="telemetry-label">${c.id}</span>
+                        <div style="display:flex; justify-content:space-between; width:100%;">
+                            <span style="font-family:var(--font-serif); font-size:1.1rem; font-weight:700;">${c.flight === '--' ? 'Standby' : 'Flight ' + c.flight}</span>
+                            <span class="telemetry-value" id="bags-${c.id.replace(/\s+/g, '')}">${c.bags} Pieces</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        hydrateResources();
+
+        setInterval(() => {
+            const bagNode = document.getElementById('bags-BeltLoop1');
+            if(bagNode) {
+                let currentBags = parseInt(bagNode.textContent);
+                if(currentBags > 0) bagNode.textContent = (currentBags - 2) + " Pieces";
+            }
+        }, 2500);
+    </script>
+</body>
+</html>

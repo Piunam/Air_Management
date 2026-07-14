@@ -1,0 +1,116 @@
+AirportManagementSystem/
+
+│
+├── backend/
+│
+│   ├── app/
+│   │
+│   ├── api/
+│   │      ├── auth.py
+│   │      ├── users.py
+│   │      ├── passengers.py
+│   │      ├── flights.py
+│   │      ├── bookings.py
+│   │      ├── payments.py
+│   │      ├── baggage.py
+│   │      ├── aircraft.py
+│   │      ├── crew.py
+│   │      ├── gates.py
+│   │      ├── runways.py
+│   │      ├── maintenance.py
+│   │      ├── weather.py
+│   │      ├── reports.py
+│   │      ├── notifications.py
+│   │      ├── dashboard.py
+│   │      └── ai.py
+│   │
+│   ├── models/
+│   │      ├── user.py
+│   │      ├── role.py
+│   │      ├── passenger.py
+│   │      ├── airline.py
+│   │      ├── flight.py
+│   │      ├── aircraft.py
+│   │      ├── seat.py
+│   │      ├── booking.py
+│   │      ├── ticket.py
+│   │      ├── payment.py
+│   │      ├── baggage.py
+│   │      ├── gate.py
+│   │      ├── runway.py
+│   │      ├── crew.py
+│   │      ├── crew_assignment.py
+│   │      ├── terminal.py
+│   │      ├── maintenance.py
+│   │      ├── parking.py
+│   │      ├── restaurant.py
+│   │      ├── shop.py
+│   │      ├── weather.py
+│   │      ├── notification.py
+│   │      ├── complaint.py
+│   │      ├── feedback.py
+│   │      └── audit_log.py
+│   │
+│   ├── schemas/
+│   │
+│   ├── services/
+│   │
+│   ├── repositories/
+│   │
+│   ├── security/
+│   │
+│   ├── middleware/
+│   │
+│   ├── ai/
+│   │
+│   ├── utils/
+│   │
+│   ├── static/
+│   │
+│   ├── templates/
+│   │
+│   ├── main.py
+│   ├── database.py
+│   ├── config.py
+│   └── dependencies.py
+│
+├── frontend/
+│
+│   ├── public/
+│   │
+│   ├── src/
+│   │
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── context/
+│   ├── services/
+│   ├── routes/
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── database/
+│
+│   ├── schema.sql
+│   ├── seed.sql
+│   └── migrations/
+│
+├── docs/
+│
+│   ├── SRS.pdf
+│   ├── UML/
+│   ├── API_Documentation.md
+│   └── User_Manual.md
+│
+├── tests/
+│
+│   ├── unit/
+│   ├── integration/
+│   └── api/
+│
+├── requirements.txt
+├── .env
+├── .gitignore
+├── README.md
+└── LICENSE
