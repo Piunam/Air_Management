@@ -7,7 +7,7 @@ from app.models.booking import Booking
 
 from app.models.airline import Airline
 from app.models.aircraft import Aircraft
-
+from app.models.checkin import CheckIn
 from app.models.terminal import Terminal
 from app.models.gate import Gate
 
