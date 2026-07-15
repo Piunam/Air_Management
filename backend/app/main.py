@@ -4,6 +4,8 @@ from app.api.auth import router as auth_router
 from app.api.passengers import router as passenger_router
 from app.api.bookings import router as booking_router
 from app.api.dashboard import router as dashboard_router
+from app.api.boarding_pass import router as boarding_pass_router
+
 app = FastAPI(
     title="Airport Management System",
     version="1.0.0"
@@ -27,3 +29,4 @@ def health():
 app.include_router(flight_router)
 app.include_router(booking_router)
 app.include_router(dashboard_router)
+app.include_router(boarding_pass_router)
