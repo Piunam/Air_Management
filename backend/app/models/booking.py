@@ -86,3 +86,8 @@ class Booking(Base):
     back_populates="booking",
     uselist=False
     )
+    baggage = relationship(
+    "Baggage",
+    back_populates="booking",
+    cascade="all, delete-orphan"
+    )

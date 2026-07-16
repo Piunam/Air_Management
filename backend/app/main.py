@@ -7,6 +7,7 @@ from app.api.dashboard import router as dashboard_router
 from app.api.boarding_pass import router as boarding_pass_router
 from app.api.checkin import router as checkin_router
 from app.api.boarding import router as boarding_router
+from app.api.baggage import router as baggage_router
 
 
 
@@ -36,3 +37,4 @@ app.include_router(dashboard_router)
 app.include_router(boarding_pass_router)
 app.include_router(checkin_router)
 app.include_router(boarding_router)
+app.include_router(baggage_router)

@@ -12,7 +12,7 @@ from app.models.terminal import Terminal
 from app.models.gate import Gate
 from app.models.boarding import Boarding
 from app.models.runway import Runway
-
+from app.models.baggage import Baggage
 from app.models.crew import Crew
 from app.models.crew_assignment import CrewAssignment
 
