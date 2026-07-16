@@ -98,5 +98,10 @@ class Flight(Base):
         "Booking",
         back_populates="flight"
     )
+    seats = relationship(
+    "Seat",
+    back_populates="flight",
+    cascade="all, delete-orphan"
+    )
 
     

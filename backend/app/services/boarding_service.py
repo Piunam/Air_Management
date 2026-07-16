@@ -20,6 +20,19 @@ class BoardingService:
             db,
             booking_reference
         )
+        flight = booking.flight
+
+        if flight.status == "Cancelled":
+            raise HTTPException(
+                status_code=400,
+                detail="Cannot board a cancelled flight."
+            )
+
+        if flight.status != "Boarding":
+            raise HTTPException(
+                status_code=400,
+                detail="Boarding has not started."
+            )
 
         if booking is None:
             raise HTTPException(

@@ -91,3 +91,12 @@ class Booking(Base):
     back_populates="booking",
     cascade="all, delete-orphan"
     )
+    seat_id = Column(
+    Integer,
+    ForeignKey("seats.id"),
+    nullable=True
+    )
+    seat = relationship(
+    "Seat",
+    back_populates="booking"
+    )

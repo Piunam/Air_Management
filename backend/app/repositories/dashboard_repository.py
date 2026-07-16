@@ -4,30 +4,97 @@ from sqlalchemy.orm import Session
 from app.models.flight import Flight
 from app.models.passenger import Passenger
 from app.models.booking import Booking
-from app.models.aircraft import Aircraft
-from app.models.crew import Crew
+from app.models.payment import Payment
+from app.models.baggage import Baggage
 
 
 class DashboardRepository:
 
     @staticmethod
-    def get_statistics(db: Session):
+    def total_flights(db: Session):
 
-        return {
+        return db.query(Flight).count()
 
-            "total_flights":
-                db.query(func.count(Flight.id)).scalar(),
+    @staticmethod
+    def delayed_flights(db: Session):
 
-            "total_passengers":
-                db.query(func.count(Passenger.id)).scalar(),
+        return (
+            db.query(Flight)
+            .filter(
+                Flight.status == "Delayed"
+            )
+            .count()
+        )
 
-            "total_bookings":
-                db.query(func.count(Booking.id)).scalar(),
+    @staticmethod
+    def cancelled_flights(db: Session):
 
-            "total_aircraft":
-                db.query(func.count(Aircraft.id)).scalar(),
+        return (
+            db.query(Flight)
+            .filter(
+                Flight.status == "Cancelled"
+            )
+            .count()
+        )
 
-            "total_crew":
-                db.query(func.count(Crew.id)).scalar()
+    @staticmethod
+    def active_flights(db: Session):
 
-        }
+        return (
+            db.query(Flight)
+            .filter(
+                Flight.status.in_(
+                    [
+                        "Scheduled",
+                        "Boarding",
+                        "Taxiing",
+                        "Departed",
+                        "In Air",
+                        "Landing"
+                    ]
+                )
+            )
+            .count()
+        )
+
+    @staticmethod
+    def passengers(db: Session):
+
+        return db.query(Passenger).count()
+    @staticmethod
+    def checked_in(db: Session):
+
+        from app.models.checkin import CheckIn
+
+        return db.query(CheckIn).count()
+
+
+    @staticmethod
+    def boarded(db: Session):
+
+        from app.models.boarding import Boarding
+
+        return db.query(Boarding).count()
+    @staticmethod
+    def bookings(db: Session):
+
+        return db.query(Booking).count()
+
+    @staticmethod
+    def baggage(db: Session):
+
+        return db.query(Baggage).count()
+
+    @staticmethod
+    def revenue(db: Session):
+
+        total = (
+            db.query(
+                func.sum(
+                    Payment.amount
+                )
+            )
+            .scalar()
+        )
+
+        return total or 0

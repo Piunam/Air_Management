@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-
 from sqlalchemy.orm import Session
 
 from app.dependencies import get_db
@@ -12,9 +11,11 @@ router = APIRouter(
 )
 
 
-@router.get("/statistics")
-def statistics(
+@router.get("/overview")
+def overview(
     db: Session = Depends(get_db)
 ):
 
-    return DashboardService.statistics(db)
+    return DashboardService.overview(
+        db
+    )

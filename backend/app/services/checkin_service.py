@@ -26,6 +26,20 @@ class CheckInService:
                 detail="Booking not found"
             )
 
+        flight = booking.flight
+
+        if flight.status == "Cancelled":
+            raise HTTPException(
+                status_code=400,
+                detail="Flight has been cancelled."
+            )
+
+        if flight.status == "Departed":
+            raise HTTPException(
+                status_code=400,
+                detail="Flight already departed."
+            )
+
         existing = CheckInRepository.get_checkin(
             db,
             booking.id
@@ -44,10 +58,22 @@ class CheckInService:
             status="Checked In"
         )
 
-        return CheckInRepository.create(
+        checkin = CheckInRepository.create(
             db,
             checkin
         )
+
+        from app.services.notification_service import NotificationService
+
+        NotificationService.create(
+            db=db,
+            title="Check-In Complete",
+            message=f"{booking.booking_reference} has completed check-in."
+        )
+
+        return checkin
+
+
 
     @staticmethod
     def get(
@@ -126,3 +152,4 @@ class CheckInService:
         return {
             "message": "Check-in deleted successfully"
         }
+    

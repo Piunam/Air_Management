@@ -9,6 +9,8 @@ from app.schemas.booking import (
     BookingUpdate
 )
 
+from app.services.notification_service import NotificationService
+
 
 class BookingService:
 
@@ -23,10 +25,18 @@ class BookingService:
 
         booking = Booking(**data.model_dump())
 
-        return BookingRepository.create(
+        booking = BookingRepository.create(
             db,
             booking
         )
+
+        NotificationService.create(
+            db=db,
+            title="Booking Confirmed",
+            message=f"Booking {booking.booking_reference} has been confirmed."
+        )
+
+        return booking
 
     @staticmethod
     def get_all(db: Session):
@@ -50,13 +60,9 @@ class BookingService:
         )
 
         if not booking:
-
             return None
 
-        for key, value in data.model_dump(
-            exclude_unset=True
-        ).items():
-
+        for key, value in data.model_dump(exclude_unset=True).items():
             setattr(booking, key, value)
 
         BookingRepository.update(db)
@@ -72,7 +78,6 @@ class BookingService:
         )
 
         if not booking:
-
             return False
 
         BookingRepository.delete(

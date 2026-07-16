@@ -16,6 +16,7 @@ from app.models.baggage import Baggage
 from app.models.crew import Crew
 from app.models.crew_assignment import CrewAssignment
 
+
 from app.models.seat import Seat
 
 from app.models.baggage import Baggage
