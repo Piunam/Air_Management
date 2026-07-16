@@ -10,7 +10,7 @@ from app.models.aircraft import Aircraft
 from app.models.checkin import CheckIn
 from app.models.terminal import Terminal
 from app.models.gate import Gate
-
+from app.models.boarding import Boarding
 from app.models.runway import Runway
 
 from app.models.crew import Crew

@@ -81,3 +81,8 @@ class Booking(Base):
     back_populates="booking",
     uselist=False
     )
+    boarding = relationship(
+    "Boarding",
+    back_populates="booking",
+    uselist=False
+    )
